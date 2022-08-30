@@ -28,6 +28,7 @@ is for this action to be triggered by a Github issue comment in order to parse a
 The data that was parsed from the JSON or YAML payload as a string. It can be easily converted to JSON using the [fromJSON expression](https://docs.github.com/en/enterprise-cloud@latest/actions/learn-github-actions/expressions#fromjson) 
 
 ## Example usage
+``` yaml
 on:
   issue_comment:
     types: [created]
@@ -48,3 +49,4 @@ jobs:
         run: echo ${{ steps.parse.outputs.content }} 
       - name: Use the output as JSON
         run: echo ${{ fromJson(steps.parse.outputs.content).some_key }}
+```
