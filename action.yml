@@ -25,5 +25,5 @@ outputs:
     description: 'The parsed content from the comment body as a string'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
