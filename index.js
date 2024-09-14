@@ -7,6 +7,7 @@ let octokit = null;
 async function run() {
     const commentId = core.getInput('comment_id', {required: true});
     const parserFormat = core.getInput('format', {required: true});
+    
     try {
         const commentBody = await getCommentBody(commentId);
         const result = parseBody(commentBody);
@@ -25,8 +26,8 @@ run();
 
 function getOctokit() {
     if (octokit == null) {
+
       const token = core.getInput('github_token', {required: true});
-  
       if (!token) {
         core.error('Failed to provide a GitHub token for accessing the REST API.');
       }
@@ -55,6 +56,8 @@ function getCommentBody(commentId) {
 }
 
 function getBodyPayloadRegex(payload) {
+    // strip out contents are outside of json 
+    const jsonMatch = payload.match(/{.*}/);
     const marker = core.getInput('marker');
 
     let header = payload;
